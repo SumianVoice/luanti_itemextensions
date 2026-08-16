@@ -53,7 +53,14 @@ itemdef = {
 	-- when moved from equipment list
 	_on_unequipped = function(itemstack, player, info) end, --> void
 	-- circumvents / stands in for `core.get_node_drops`
-	_get_node_drops = function(node, toolname) end --> list of itemstacks: table[i] = ItemStack
+	-- runs only on node definitions whose nodes are dug
+	_get_node_drops = function(node, toolname, tool, digger, pos, drops)
+		table.insert(drops, ItemStack("itemname"))
+	end,
+	-- runs on held item, not on a dug node
+	_get_tool_node_drops = function(node, toolname, tool, digger, pos, drops)
+		table.insert(drops, ItemStack("itemname"))
+	end,
 }
 
 -- If any slot has a bound group name, no other items may be moved there. You may bind multiple groups to one slot/list.
